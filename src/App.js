@@ -1,10 +1,21 @@
 import './App.css';
+import Info from "./Info.js"
 
 function App() {
   return (
     <div className="App">
-      <p>Barebones app</p>
+      <Info/>
+      <AddItem/>
     </div>
+  );
+}
+
+function AddItem(){
+  return(
+    <form>
+      <label for="text-form">Type something...</label>
+      <input type="text" id="text-form"/>
+    </form>
   );
 }
 
