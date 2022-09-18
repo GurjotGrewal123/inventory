@@ -20,11 +20,10 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <AddItem addItem={addItemToData} />
-      <ItemsDisplay items={data["items"]} />
-      <SearchBar updateSearchParams={updateFilters} />
-
+    <div className="container">
+      <div className="row mt-4"><AddItem addItem={addItemToData} /></div>
+      <div className="row mt-4"><SearchBar updateSearchParams={updateFilters} /></div>
+      <div className="row mt-4"><ItemsDisplay items={data["items"]} /></div>
     </div>
   );
 }
