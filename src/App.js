@@ -1,7 +1,8 @@
 import './App.css';
 import SearchBar from "./SearchBar";
-import { useState } from "react"
-import AddItem from "./AddItem"
+import { useState } from "react";
+import AddItem from "./AddItem";
+import ItemsDisplay from "./ItemsDisplay";
 
 function App() {
   const [filters, setFilters] = useState({});
@@ -13,6 +14,7 @@ function App() {
 
   const addItemToData = (item) => {
     let items = data["items"];
+    item.id = items.length;
     items.push(item);
     setData({ items: items });
   };
@@ -20,6 +22,7 @@ function App() {
   return (
     <div className="App">
       <AddItem addItem={addItemToData} />
+      <ItemsDisplay items={data["items"]} />
       <SearchBar updateSearchParams={updateFilters} />
 
     </div>
