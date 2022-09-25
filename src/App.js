@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import AddItem from "./AddItem";
 import ItemsDisplay from "./ItemsDisplay";
 
+
 function App() {
   const [filters, setFilters] = useState({});
   const [data, setData] = useState({ items: [] })
@@ -24,15 +25,15 @@ function App() {
     const requestOptions = {
       method: "DELETE",
     };
-    fetch(`http://localhost:3000/items/${item.id}`, requestOptions).then(
-      (response) => {
+    fetch(`http://localhost:3000/items/${item.id}`, requestOptions)
+      .then((response) => {
         if (response.ok) {
           const idx = items.indexOf(item);
           items.splice(idx, 1);
           setData({ items: items });
         }
       }
-    );
+      );
   };
 
   const addItemToData = (item) => {
