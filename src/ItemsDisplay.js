@@ -1,4 +1,4 @@
-function ItemsDisplay(items, deleteItem) {
+function ItemsDisplay({ items, deleteItem }) {
 
     const showItem = (item) => {
         return (<tr>
@@ -25,7 +25,7 @@ function ItemsDisplay(items, deleteItem) {
                         <th scope="col">Delete</th>
                     </tr>
                 </thead>
-                <tbody>{items.items.map(showItem)}</tbody>
+                <tbody>{items.map(showItem)}</tbody>
             </table>
         </div>
     </div>);
