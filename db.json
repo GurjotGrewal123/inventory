@@ -1,0 +1,18 @@
+{
+  "items": [
+    {
+      "name": "ds",
+      "price": "2",
+      "type": "",
+      "brand": "",
+      "id": 2
+    },
+    {
+      "name": "Fruit",
+      "price": "1",
+      "type": "",
+      "brand": "",
+      "id": 3
+    }
+  ]
+}

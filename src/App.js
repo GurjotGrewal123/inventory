@@ -1,6 +1,6 @@
 import './App.css';
 import SearchBar from "./SearchBar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AddItem from "./AddItem";
 import ItemsDisplay from "./ItemsDisplay";
 
@@ -8,15 +8,48 @@ function App() {
   const [filters, setFilters] = useState({});
   const [data, setData] = useState({ items: [] })
 
+  useEffect(() => {
+    fetch("http://localhost:3000/items")
+      .then((response) => response.json())
+      .then((data) => setData({ items: data }));
+  }, []);
+
+
+  const deleteItem = (item) => {
+    const items = data["items"];
+    const requestOptions = {
+      method: "DELETE"
+    }
+    fetch(`http://localhost:3000/items/${item.id}`, requestOptions)
+      .then((response) => {
+        if (response.ok) {
+          const idx = items.indexOf(item);
+          items.splice(idx, 1);
+          setData({ items: items });
+        }
+      })
+  }
+
   const updateFilters = (searchParams) => {
     setFilters(searchParams);
   };
 
   const addItemToData = (item) => {
     let items = data["items"];
-    item.id = items.length;
-    items.push(item);
-    setData({ items: items });
+
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(item),
+    };
+    fetch("http://localhost:3000/items", requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        items.push(data);
+        setData({ items: items });
+      });
   };
 
   const filterData = (data) => {
@@ -49,7 +82,7 @@ function App() {
     <div className="container">
       <div className="row mt-4"><AddItem addItem={addItemToData} /></div>
       <div className="row mt-5"><SearchBar updateSearchParams={updateFilters} /></div>
-      <div className="row mt-5"><ItemsDisplay items={filterData(data["items"])} /></div>
+      <div className="row mt-5"><ItemsDisplay deleteItem={deleteItem} items={filterData(data["items"])} /></div>
     </div>
   );
 }
